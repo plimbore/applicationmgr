@@ -1,0 +1,7 @@
+{
+  "editor.detectIndentation": true,
+  "editor.insertSpaces": true,
+  "editor.renderWhitespace": "all",
+  "editor.tabSize": 2,
+  "editor.indentSize": "tabSize"
+}

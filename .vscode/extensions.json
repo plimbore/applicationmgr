@@ -1,0 +1,12 @@
+{
+  "recommendations": [
+    "ms-vscode-remote.remote-wsl",
+    "ms-vscode-remote.remote-containers",
+    "ms-azuretools.vscode-docker",
+    "inercia.vscode-k3d",
+    "ms-kubernetes-tools.kind-vscode",
+    "myml.vscode-markdown-plantuml-preview",
+    "bierner.markdown-mermaid",
+    "sonarsource.sonarlint-vscode"
+  ]
+}
