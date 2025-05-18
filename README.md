@@ -56,7 +56,7 @@ make deploy IMG=applicationmgr:latest
 privileges or be logged in as admin.
 
 **Create instances of your solution**
-You can apply the samples (examples) from the config/sample:
+You can apply the samples (examples) from the config/sample or examples directory:
 
 ```sh
 kubectl apply -k config/samples/

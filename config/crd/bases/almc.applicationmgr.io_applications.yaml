@@ -65,6 +65,9 @@ spec:
                     items:
                       description: Host defines the ingress host configurations.
                       properties:
+                        host:
+                          description: Hostname for ingress.
+                          type: string
                         paths:
                           description: List of paths configuration object.
                           items:
@@ -78,12 +81,9 @@ spec:
                             - path
                             type: object
                           type: array
-                        string:
-                          description: Hostname for ingress.
-                          type: string
                       required:
+                      - host
                       - paths
-                      - string
                       type: object
                     type: array
                 required:

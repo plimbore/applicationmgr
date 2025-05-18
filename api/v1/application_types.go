@@ -47,7 +47,7 @@ type Path struct {
 // Host defines the ingress host configurations.
 type Host struct {
 	// Hostname for ingress.
-	Host string `json:"string"`
+	Host string `json:"host"`
 
 	// List of paths configuration object.
 	Paths []Path `json:"paths"`

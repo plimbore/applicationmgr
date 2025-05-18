@@ -1,6 +1,9 @@
 apiVersion: almc.applicationmgr.io/v1
 kind: Application
 metadata:
+  labels:
+    app.kubernetes.io/name: applicationmgr
+    app.kubernetes.io/managed-by: kustomize
   name: application-nginx
 spec:
   image:
