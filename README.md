@@ -24,6 +24,21 @@ The statuses are updated properly in the CR and required default settings are pa
 
 ### To Deploy on the cluster
 
+Note: You can refer [./docs/assets/asciinema/ cast files for build steps](./docs/assets/asciinema/).
+
+- Build & test (For windows users: use WSL)
+
+    ```sh
+    asciinema play docs/assets/asciinema/dev-build-test.cast
+    ```
+
+- Cleanup
+
+    ```sh
+    asciinema play docs/assets/asciinema/dev-cleanup.cast
+    ```
+
+
 **Build and push your image to the location specified by `IMG`:**
 
 ```sh
