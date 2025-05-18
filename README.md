@@ -27,6 +27,10 @@ The statuses are updated properly in the CR and required default settings are pa
 **Build and push your image to the location specified by `IMG`:**
 
 ```sh
+# To build locally
+# Note: If IMG is not provided, default value would be controller:latest
+make docker-build IMG=applicationmgr:latest
+# To build and push
 make docker-build docker-push IMG=<some-registry>/applicationmgr:tag
 ```
 
@@ -44,6 +48,8 @@ make install
 
 ```sh
 make deploy IMG=<some-registry>/applicationmgr:tag
+# To deploy local image
+make deploy IMG=applicationmgr:latest
 ```
 
 > **NOTE**: If you encounter RBAC errors, you may need to grant yourself cluster-admin
@@ -59,6 +65,7 @@ kubectl apply -k config/samples/
 >**NOTE**: Ensure that the samples has default values to test it out.
 
 ### To Uninstall
+
 **Delete the instances (CRs) from the cluster:**
 
 ```sh
