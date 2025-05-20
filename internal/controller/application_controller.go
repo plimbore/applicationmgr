@@ -161,7 +161,7 @@ func (r *ApplicationReconciler) Reconcile(ctx context.Context, req ctrl.Request)
 
 		// Create Deployment
 		log.Info("Creating deployment" + deploymentName + " in namespace: " + deploymentName)
-		err = r.Create(context.TODO(), deployment) //, metav1.CreateOptions{})
+		err = r.Create(context.TODO(), deployment)
 		if err != nil {
 			log.Error(err, "Creating deployment failed")
 		} else {
@@ -213,7 +213,7 @@ func (r *ApplicationReconciler) Reconcile(ctx context.Context, req ctrl.Request)
 
 		// Create Service
 		log.Info("Creating service" + serviceName + " in namespace: " + serviceName)
-		err = r.Create(context.TODO(), service) //, metav1.CreateOptions{})
+		err = r.Create(context.TODO(), service)
 		if err != nil {
 			log.Error(err, "Creating service failed")
 		} else {
@@ -296,7 +296,7 @@ func (r *ApplicationReconciler) Reconcile(ctx context.Context, req ctrl.Request)
 
 		// Create Ingress
 		log.Info("Creating ingress" + ingressName + " in namespace: " + ingressName)
-		err = r.Create(context.TODO(), ingress) //, metav1.CreateOptions{})
+		err = r.Create(context.TODO(), ingress)
 		if err != nil {
 			log.Error(err, "Creating ingress failed")
 		} else {
