@@ -38,6 +38,8 @@ Create api
 ```sh
 # almc: Application Lifecycle Manager Controller
 kubebuilder create api --group almc --version v1 --kind Application
+# For cluster scoped, use
+kubebuilder create api --group almc --version v1 --kind Application --resource=true --controller=true --namespaced=false
 ```
 
 This will create following files/directories
@@ -70,3 +72,27 @@ Add file [./helm-chart/values-local.yaml](./helm-chart/values-local.yaml) for lo
 
 Create [./examples](./examples/) directory
 
+- Changing scope Namespaced (default) to Cluster
+
+Refer [kubebuilder document for scope](https://book.kubebuilder.io/reference/scopes#configuring-crds-scopes)
+
+Add following line in [/api/v1/application_types.go](/api/v1/application_types.go)
+
+```go
+// +kubebuilder:resource:scope=Cluster
+```
+
+Regenerate manifests
+
+```sh
+make manifests
+```
+
+Notes:
+
+- Redploy after this change
+- If you get following error, check `kubectl` version
+
+    ```log
+    Error from server (NotFound): error when creating "config/samples/": the server could not find the requested resource (post applications.almc.applicationmgr.io)
+    ```

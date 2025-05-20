@@ -1,4 +1,4 @@
-# Local environment setpu
+# Local environment setup
 
 ### IDE
 
@@ -103,7 +103,7 @@
 
     You'll see above changes in `~/.docker/config.json` & `~/.docker/daemon.json`
 
-- kubernetes ~ v1.31
+- kubernetes ~ v1.31.5
 
     - [k3d](https://github.com/k3d-io/k3d) >= v5.8.3 + k3s >= v1.31.5-k3s1 or [kind](https://github.com/kubernetes-sigs/kind)
 
@@ -114,10 +114,17 @@
         Note: K3s uses `rancher/k3s` image about `222MB` to create nodes
 
         ```sh
+        # Create registry to pull from local docker images
+        k3d registry create -i ligfx/k3d-registry-dockerd:v0.8 -v /var/run/docker.sock:/var/run/docker.sock registry
+
+        # See if registry is created
+        k3d registry list
+
+        # Create cluster
         k3d cluster create mycluster --config ./k3s-cluster-config.yaml
 
-        # You can change load-balancer poart using
-        k3d cluster edit mycluster --port-add 8085:80
+        # You can change load-balancer port using (optional, current port 8080)
+        # k3d cluster edit mycluster --port-add 8085:80
 
         # To delete cluster
         k3d cluster delete mycluster
@@ -143,7 +150,7 @@
         kind load docker-image my-custom-image-0 my-custom-image-1
         ```
 
-- [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/) ~= v1.33.1
+- [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/) ~= v1.31.5
 
     For WSL, create softlink in WSL ubuntu to windows host so that both WSL and Windows host connect to same kubecontext, e.g.
 

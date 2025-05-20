@@ -2,6 +2,13 @@
 
 Application Lifecycle Manager Controller for kubernetes
 
+NOTICE: Helm chart is work in progress
+
+## TODO
+
+- [ ] Helm chart
+- [ ] ingress https support
+
 ## Description
 
 A Kubernetes controller that manages the lifecycle of applications defined by a new Custom Resource Definition (CRD) called Application.
@@ -32,6 +39,12 @@ Note: You can refer [./docs/assets/asciinema/ cast files for build steps](./docs
     asciinema play docs/assets/asciinema/dev-build-test.cast
     ```
 
+- Apply Application CRD
+
+    ```sh
+    asciinema play docs/assets/asciinema/dev-apply.cast
+    ```
+
 - Cleanup
 
     ```sh
@@ -42,6 +55,9 @@ Note: You can refer [./docs/assets/asciinema/ cast files for build steps](./docs
 **Build and push your image to the location specified by `IMG`:**
 
 ```sh
+# To build binary
+CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -a -o manager cmd/main.go
+
 # To build locally
 # Note: If IMG is not provided, default value would be controller:latest
 make docker-build IMG=applicationmgr:latest
