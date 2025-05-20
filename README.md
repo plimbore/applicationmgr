@@ -2,6 +2,13 @@
 
 Application Lifecycle Manager Controller for kubernetes
 
+NOTICE: Helm chart is work in progress
+
+## TODO
+
+- [ ] Helm chart
+- [ ] ingress https support
+
 ## Description
 
 A Kubernetes controller that manages the lifecycle of applications defined by a new Custom Resource Definition (CRD) called Application.
@@ -24,9 +31,37 @@ The statuses are updated properly in the CR and required default settings are pa
 
 ### To Deploy on the cluster
 
+Note: You can refer [./docs/assets/asciinema/ cast files for build steps](./docs/assets/asciinema/).
+
+- Build & test (For windows users: use WSL)
+
+    ```sh
+    asciinema play docs/assets/asciinema/dev-build-test.cast
+    ```
+
+- Apply Application CRD
+
+    ```sh
+    asciinema play docs/assets/asciinema/dev-apply.cast
+    ```
+
+- Cleanup
+
+    ```sh
+    asciinema play docs/assets/asciinema/dev-cleanup.cast
+    ```
+
+
 **Build and push your image to the location specified by `IMG`:**
 
 ```sh
+# To build binary
+CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -a -o manager cmd/main.go
+
+# To build locally
+# Note: If IMG is not provided, default value would be controller:latest
+make docker-build IMG=applicationmgr:latest
+# To build and push
 make docker-build docker-push IMG=<some-registry>/applicationmgr:tag
 ```
 
@@ -44,13 +79,15 @@ make install
 
 ```sh
 make deploy IMG=<some-registry>/applicationmgr:tag
+# To deploy local image
+make deploy IMG=applicationmgr:latest
 ```
 
 > **NOTE**: If you encounter RBAC errors, you may need to grant yourself cluster-admin
 privileges or be logged in as admin.
 
 **Create instances of your solution**
-You can apply the samples (examples) from the config/sample:
+You can apply the samples (examples) from the config/sample or examples directory:
 
 ```sh
 kubectl apply -k config/samples/
@@ -59,6 +96,7 @@ kubectl apply -k config/samples/
 >**NOTE**: Ensure that the samples has default values to test it out.
 
 ### To Uninstall
+
 **Delete the instances (CRs) from the cluster:**
 
 ```sh

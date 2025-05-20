@@ -4,7 +4,7 @@ metadata:
   labels:
     app.kubernetes.io/name: applicationmgr
     app.kubernetes.io/managed-by: kustomize
-  name: application-sample
+  name: application-nginx
 spec:
   image:
     repository: nginx

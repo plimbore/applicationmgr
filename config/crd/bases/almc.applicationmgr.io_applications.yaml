@@ -39,10 +39,70 @@ spec:
           spec:
             description: ApplicationSpec defines the desired state of Application.
             properties:
-              foo:
-                description: Foo is an example field of Application. Edit application_types.go
-                  to remove/update
+              healthcheck:
+                description: Healthcheck endpoint for application liveness and readiness
+                  probes.
                 type: string
+              image:
+                description: Repository and tag of the image to be deployed, Edit
+                  application_types.go to remove/update
+                properties:
+                  repository:
+                    description: Repository of the image to be deployed.
+                    type: string
+                  tag:
+                    description: Tag of the image to be deployed.
+                    type: string
+                required:
+                - repository
+                - tag
+                type: object
+              ingress:
+                description: Ingress configuration.
+                properties:
+                  hosts:
+                    description: List of host and paths configuration.
+                    items:
+                      description: Host defines the ingress host configurations.
+                      properties:
+                        host:
+                          description: Hostname for ingress.
+                          type: string
+                        paths:
+                          description: List of paths configuration object.
+                          items:
+                            description: Path defines path configuration for ingress
+                              host
+                            properties:
+                              path:
+                                description: URL path
+                                type: string
+                            required:
+                            - path
+                            type: object
+                          type: array
+                      required:
+                      - host
+                      - paths
+                      type: object
+                    type: array
+                required:
+                - hosts
+                type: object
+              service:
+                description: Service configuration.
+                properties:
+                  port:
+                    description: Port number on which application is listening.
+                    type: integer
+                required:
+                - port
+                type: object
+            required:
+            - healthcheck
+            - image
+            - ingress
+            - service
             type: object
           status:
             description: ApplicationStatus defines the observed state of Application.

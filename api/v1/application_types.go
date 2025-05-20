@@ -23,13 +23,61 @@ import (
 // EDIT THIS FILE!  THIS IS SCAFFOLDING FOR YOU TO OWN!
 // NOTE: json tags are required.  Any new fields you add must have json tags for the fields to be serialized.
 
+// Image defines the Repository and tag of the image to be deployed.
+type Image struct {
+	// Repository of the image to be deployed.
+	Repository string `json:"repository"`
+
+	// Tag of the image to be deployed.
+	Tag string `json:"tag"`
+}
+
+// Service defines the kubernetes service configuration to be created.
+type Service struct {
+	// Port number on which application is listening.
+	Port int `json:"port"`
+}
+
+// Path defines path configuration for ingress host
+type Path struct {
+	// URL path
+	Path string `json:"path"`
+}
+
+// Host defines the ingress host configurations.
+type Host struct {
+	// Hostname for ingress.
+	Host string `json:"host"`
+
+	// List of paths configuration object.
+	Paths []Path `json:"paths"`
+}
+
+// Ingress defines the kubernetes ingress configuration to be created.
+type Ingress struct {
+	// List of host and paths configuration.
+	Hosts []Host `json:"hosts"`
+}
+
 // ApplicationSpec defines the desired state of Application.
 type ApplicationSpec struct {
 	// INSERT ADDITIONAL SPEC FIELDS - desired state of cluster
 	// Important: Run "make" to regenerate code after modifying this file
 
 	// Foo is an example field of Application. Edit application_types.go to remove/update
-	Foo string `json:"foo,omitempty"`
+	// Foo string `json:"foo,omitempty"`
+
+	// Repository and tag of the image to be deployed, Edit application_types.go to remove/update
+	Image Image `json:"image"`
+
+	// Service configuration.
+	Service Service `json:"service"`
+
+	// Ingress configuration.
+	Ingress Ingress `json:"ingress"`
+
+	// Healthcheck endpoint for application liveness and readiness probes.
+	Healthcheck string `json:"healthcheck"`
 }
 
 // ApplicationStatus defines the observed state of Application.

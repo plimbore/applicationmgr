@@ -18,8 +18,8 @@ agents: 1 # same as `--agents 1`
 #     nodeFilters:
 #       - server:0
 #       - agent:*
-# ports:
-#   - port: 8080:80 # same as `--port '8080:80@loadbalancer'`
+ports:
+  - port: 8080:80 # same as `--port '8080:80@loadbalancer'`
 #     nodeFilters:
 #       - loadbalancer
 # env:
@@ -39,6 +39,15 @@ agents: 1 # same as `--agents 1`
 #     destination: /var/lib/rancher/k3s/server/manifests/baz.yaml
 #     nodeFilters:
 #     - "server:*"
+# Refer: https://github.com/ligfx/k3d-registry-dockerd
+registries:
+  use:
+    - k3d-registry:5000
+  config: | # define contents of the `registries.yaml` file (or reference a file); same as `--registry-config /path/to/config.yaml`
+    mirrors:
+      "*":
+        endpoint:
+          - http://k3d-registry:5000
 # registries: # define how registries should be created or used
 #   create: # creates a default registry to be used with the cluster; same as `--registry-create registry.localhost`
 #     name: registry.localhost
